@@ -8,7 +8,7 @@ namespace Hafta2.Odev2.Middlewares
 {
     public static class ConfigureExceptionHandlerExtension
     {
-        public static void ConfigureExceptionHandler(this WebApplication app)
+        public static void ConfigureExceptionHandler<T>(this WebApplication app, ILogger<T> logger)
         {
             app.UseExceptionHandler(builder =>
             {
@@ -27,13 +27,20 @@ namespace Hafta2.Odev2.Middlewares
                         case nameof(BookNotExistsException) or
                              nameof(BookToDeleteNotExistsException) or
                              nameof(WrongParameterEnteredForFilterBooksException) or
-                             nameof(SearchBooksByTitleException):
+                             nameof(SearchBooksByTitleException) or
+                             nameof(WrongUsernameEnteredException) or
+                             nameof(WrongPasswordEnteredException):
                             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                            break;
+                        case nameof(MissingLoginKeyException):
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                             break;
                         default:
                             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                             break;
                     }
+
+                    logger.LogError(contextFeature?.Error.Message);
 
                     if (contextFeature != null)
                     {

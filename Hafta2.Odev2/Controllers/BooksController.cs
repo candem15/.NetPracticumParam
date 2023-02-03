@@ -1,17 +1,16 @@
 ﻿using FluentValidation.Results;
-using Hafta2.Odev2.DbOperations;
+using Hafta2.Odev2.ActionFilters;
 using Hafta2.Odev2.Entities;
-using Hafta2.Odev2.Extensions;
 using Hafta2.Odev2.Services;
 using Hafta2.Odev2.Validators;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace Hafta2.Odev2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [RequireUserLogin] // Custom login verifier attribute
     public class BooksController : ControllerBase
     {
         private readonly BookService _bookService;

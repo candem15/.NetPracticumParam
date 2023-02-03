@@ -22,10 +22,13 @@ if (app.Environment.IsDevelopment())
 }
 
 //Global Exception handler.
-app.ConfigureExceptionHandler();
+app.ConfigureExceptionHandler(app.Services.GetRequiredService<ILogger<Program>>());
 
 //Seeding to BookStoreDb.
 BookStoreDbContextSeed.Seed(app.Services);
+
+// Request&Response logging middleware
+app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 
@@ -40,4 +43,9 @@ void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<BookStoreDbContext>();
     services.AddScoped<BookService>();
+    services.AddScoped<AuthService>();
+    services.AddHttpLogging(logging =>
+    {
+        logging.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.All;
+    });
 }

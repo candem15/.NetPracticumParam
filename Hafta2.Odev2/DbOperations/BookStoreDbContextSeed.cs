@@ -9,10 +9,34 @@ namespace Hafta2.Odev2.DbOperations
         {
             using (var context = new BookStoreDbContext(provider.CreateScope().ServiceProvider.GetRequiredService<DbContextOptions<BookStoreDbContext>>()))
             {
-                if (context.Books.Any())
+                if (context.Books.Any() && context.Users.Any())
                 {
                     return;
                 }
+
+                context.Users.AddRange(
+                    new User()
+                    {
+                        Id = 1,
+                        Name = "Eray",
+                        Username = "eraybrbr",
+                        Age = 27,
+                        Password = "eray123."
+                    }, new User()
+                    {
+                        Id = 2,
+                        Name = "Emel",
+                        Username = "practicum35",
+                        Age = 39,
+                        Password = "35practicum"
+                    }, new User()
+                    {
+                        Id = 3,
+                        Name = "Ahmet",
+                        Username = "gollum",
+                        Age = 19,
+                        Password = "lotr1923"
+                    });
 
                 context.Books.AddRange(
                     new Book()

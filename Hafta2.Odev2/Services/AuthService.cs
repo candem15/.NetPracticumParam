@@ -1,6 +1,7 @@
 ﻿using Hafta2.Odev2.DbOperations;
 using Hafta2.Odev2.Dtos;
 using Hafta2.Odev2.Exceptions;
+using Hafta2.Odev2.Extensions;
 
 namespace Hafta2.Odev2.Services
 {
@@ -24,7 +25,8 @@ namespace Hafta2.Odev2.Services
             if (user == null)
                 throw new WrongUsernameEnteredException();
 
-            if (user.Password == requestUser.Password)
+            // Validating User's password with our extension verifier.
+            if (PasswordHasherExtension.VerifyPassword(requestUser.Password, user.Password))
             {
                 logger.LogInformation($"User with username: '{user.Username}' logged in!");
 

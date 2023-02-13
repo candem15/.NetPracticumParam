@@ -1,5 +1,8 @@
 ﻿using Hafta2.Odev2.Entities;
+using Hafta2.Odev2.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Hafta2.Odev2.DbOperations
 {
@@ -13,7 +16,7 @@ namespace Hafta2.Odev2.DbOperations
                 {
                     return;
                 }
-
+                
                 context.Users.AddRange(
                     new User()
                     {
@@ -21,21 +24,21 @@ namespace Hafta2.Odev2.DbOperations
                         Name = "Eray",
                         Username = "eraybrbr",
                         Age = 27,
-                        Password = "eray123."
+                        Password = PasswordHasherExtension.HashPasword("eray123.")
                     }, new User()
                     {
                         Id = 2,
                         Name = "Emel",
                         Username = "practicum35",
                         Age = 39,
-                        Password = "35practicum"
+                        Password = PasswordHasherExtension.HashPasword("35practicum")
                     }, new User()
                     {
                         Id = 3,
                         Name = "Ahmet",
                         Username = "gollum",
                         Age = 19,
-                        Password = "lotr1923"
+                        Password = PasswordHasherExtension.HashPasword("lotr1923")
                     });
 
                 context.Books.AddRange(

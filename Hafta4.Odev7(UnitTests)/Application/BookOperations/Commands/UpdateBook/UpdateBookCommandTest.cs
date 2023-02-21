@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.UpdateBook
 {
-    public class UpdateBookCommandTest : IClassFixture<CommonTestFixture>
+    public class UpdateAuthorCommandTest : IClassFixture<CommonTestFixture>
     {
         private readonly BookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public UpdateBookCommandTest(CommonTestFixture commonTestFixture)
+        public UpdateAuthorCommandTest(CommonTestFixture commonTestFixture)
         {
             _context = commonTestFixture.Context;
             _mapper = commonTestFixture.Mapper;

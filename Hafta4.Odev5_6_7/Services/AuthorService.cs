@@ -20,14 +20,17 @@ namespace Hafta4.Odev5_6_7.Services
         }
 
         // Add new book to db by given fields.
-        public async Task<int> AddAuthorAsync(CreateAuthorDto book)
+        public async Task<int> AddAuthorAsync(CreateAuthorDto author)
         {
-            var bookToAdd = mapper.Map<Book>(book);
+            if (context.Authors.Any(x => x.Name + x.Surname == author.Name + author.Surname))
+                throw new Exception("Author with given name already exists!");
 
-            await context.Books.AddAsync(bookToAdd);
+            var authorToAdd = mapper.Map<Author>(author);
+
+            await context.Authors.AddAsync(authorToAdd);
             await context.SaveChangesAsync();
 
-            return bookToAdd.Id;
+            return authorToAdd.Id;
         }
 
         // Updates existing author at Db.

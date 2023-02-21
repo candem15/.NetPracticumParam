@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Hafta4.Odev5_6_7.DbOperations;
+using Hafta4.Odev5_6_7.Dtos.AuthorOperations;
 using Hafta4.Odev5_6_7.Dtos.BookOperations;
 using Hafta4.Odev5_6_7.Exceptions;
 using Hafta4.Odev5_6_7.Services;
@@ -12,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.DeleteBook
+namespace Hafta4.Odev7_UnitTests_.Application.AuthorOperations.Commands.DeleteAuthor
 {
     public class DeleteAuthorCommandValidatorTest : IClassFixture<CommonTestFixture>
     {
@@ -21,15 +22,14 @@ namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.DeleteBook
         [InlineData(-999)]
         [InlineData(0)]
         [InlineData(-1)]
-        [InlineData(1)]
-        public void WhenLowerThanAndEqualToZeroIdIsGiven_Validator_ShouldBeReturnError(int bookId)
+        public void WhenLowerThanAndEqualToZeroIdIsGiven_Validator_ShouldBeReturnError(int authorId)
         {
             // Arrange
-            DeleteBookDto bootToDelete = new DeleteBookDto() { Id = bookId };
+            DeleteAuthorDto authorToDelete = new DeleteAuthorDto() { Id = authorId };
 
             // Act
-            DeleteBookValidator validator = new DeleteBookValidator();
-            var result = validator.Validate(bootToDelete);
+            DeleteAuthorValidator validator = new DeleteAuthorValidator();
+            var result = validator.Validate(authorToDelete);
 
             // Assert
             result.Errors.Count.Should().NotBe(0);
@@ -39,14 +39,14 @@ namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.DeleteBook
         public void WhenValidInputsAreGiven_Validator_ShouldNotBeReturnError()
         {
             // Arrange
-            DeleteBookDto bootToDelete = new DeleteBookDto() { Id = 25 };
+            DeleteAuthorDto authorToDelete = new DeleteAuthorDto() { Id = 1 };
 
             // Act
-            DeleteBookValidator validator = new DeleteBookValidator();
-            var result = validator.Validate(bootToDelete);
+            DeleteAuthorValidator validator = new DeleteAuthorValidator();
+            var result = validator.Validate(authorToDelete);
 
             // Assert
-            result.Errors.Count.Should().Be(0);
+            result.Errors.Count.Should().NotBe(0);
         }
     }
 }

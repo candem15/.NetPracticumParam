@@ -74,7 +74,7 @@ namespace Hafta4.Odev5_6_7.Controllers
             if (!result.IsValid)
                 return BadRequest(result.Errors);
 
-            _genreService.UpdateGenre(updateGenre);
+            _genreService.UpdateGenre(updateGenre, id);
 
             return Ok();
         }

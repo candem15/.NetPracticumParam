@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.CreateBook
 {
-    public class CreateBookCommandValidatorTest
+    public class CreateAuthorCommandValidatorTest
     {
         [Theory]
         [InlineData("Lord Of The Rings", 0, 0, 0)]

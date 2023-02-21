@@ -5,7 +5,7 @@ using Hafta4.Odev5_6_7.Exceptions;
 using Hafta4.Odev5_6_7.Services;
 using Hafta4.Odev7_UnitTests_.TestSetup;
 
-namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.DeleteBook
+namespace Hafta4.Odev7_UnitTests_.Application.AuthorOperations.Commands.DeleteAuthor
 {
     public class DeleteAuthorCommandTest : IClassFixture<CommonTestFixture>
     {
@@ -21,32 +21,32 @@ namespace Hafta4.Odev7_UnitTests_.Application.BookOperations.Commands.DeleteBook
         [Theory]
         [InlineData(-5)]
         [InlineData(99999)]
-        public void WhenGivenBookIdIsNotExist_InvalidOperationException_ShouldBeReturn(int bookId)
+        public void WhenGivenAuthorIdIsNotExist_Exception_ShouldBeReturn(int authorId)
         {
             // Arrange (preparation)
-            BookService service = new BookService(_context, _mapper);
+            AuthorService service = new AuthorService(_context, _mapper);
 
             // Act & Assert (run and confirmation)
             FluentActions
-                .Invoking(async () => await service.DeleteBook(bookId))
-                .Should().ThrowAsync<BookToDeleteNotExistsException>();
+                .Invoking(async () => await service.DeleteAuthorAsync(authorId))
+                .Should().ThrowAsync<AuthorNotExistsException>();
         }
 
         [Theory]
         [InlineData(3)]
         [InlineData(1)]
-        public void WhenValidInputsAreGiven_Book_ShouldBeDeleted(int bookId)
+        public void WhenValidInputsAreGiven_Author_ShouldBeDeleted(int authorId)
         {
             // Arrange (preparation)
-            BookService service = new BookService(_context, _mapper);
+            AuthorService service = new AuthorService(_context, _mapper);
 
-            // Act
+            // Act & Assert (run and confirmation)
             FluentActions
-               .Invoking(async () => await service.DeleteBook(bookId)).Invoke();
+                .Invoking(async () => await service.DeleteAuthorAsync(authorId)).Invoke();
 
             // Assert 
-            var book = _context.Books.SingleOrDefault(x => x.Id == bookId);
-            book.Should().BeNull();
+            var author = _context.Authors.SingleOrDefault(x => x.Id == authorId);
+            author.Should().BeNull();
         }
     }
 }

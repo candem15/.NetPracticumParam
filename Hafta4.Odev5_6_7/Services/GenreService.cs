@@ -11,14 +11,12 @@ namespace Hafta4.Odev5_6_7.Services
     public class GenreService
     {
         private readonly BookStoreDbContext context;
-        private readonly ILogger<GenreService> logger;
         private readonly IMapper mapper;
 
-        public GenreService(BookStoreDbContext context, IMapper mapper, ILogger<GenreService> logger)
+        public GenreService(BookStoreDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
-            this.logger = logger;
         }
 
         // Return all genres.
@@ -46,6 +44,9 @@ namespace Hafta4.Odev5_6_7.Services
         // Add new genre to db by given fields.
         public async Task AddGenreAsync(CreateGenreDto genre)
         {
+            if (context.Genres.Any(x => x.Name == genre.Name))
+                throw new Exception("Genre to create is already exists!");
+
             var genreToAdd = mapper.Map<Genre>(genre);
 
             await context.Genres.AddAsync(genreToAdd);
@@ -53,9 +54,12 @@ namespace Hafta4.Odev5_6_7.Services
         }
 
         // Updates existing genre at Db.
-        public void UpdateGenre(UpdateGenreDto genre)
+        public void UpdateGenre(UpdateGenreDto genre, int id)
         {
-            var genreToUpdate = context.Genres.Where(x=>x.Name==genre.Name).FirstOrDefault();
+            if (!context.Genres.Any(x => x.Id == id) || context.Genres.Any(x => x.Name == genre.Name))
+                throw new Exception("Genre with given name already exists or wrong id entered!");
+
+            var genreToUpdate = context.Genres.Where(x => x.Id == id).FirstOrDefault();
             genreToUpdate = mapper.Map<Genre>(genre);
 
             context.Genres.Update(genreToUpdate);

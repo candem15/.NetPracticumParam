@@ -23,6 +23,9 @@ namespace Hafta4.Odev5_6_7.Services
         // Add new book to db by given fields.
         public async Task<int> AddBookAsync(CreateBookDto book)
         {
+            if (context.Books.Any(x => x.Title == book.Title))
+                throw new Exception($"Book with title: {book.Title} already exists!");
+
             var bookToAdd = mapper.Map<Book>(book);
 
             await context.Books.AddAsync(bookToAdd);

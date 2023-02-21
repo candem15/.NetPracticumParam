@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using Hafta4.Odev5_6_7.ActionFilters;
 using Hafta4.Odev5_6_7.Dtos.BookOperations;
 using Hafta4.Odev5_6_7.Entities;
@@ -42,6 +43,11 @@ namespace Hafta4.Odev5_6_7.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> GetBookByIdAsync(int id)
         {
+
+            GetBookByIdValidator validator = new GetBookByIdValidator();
+
+            validator.ValidateAndThrow(new GetBookDetailsDto { Id = id });
+
             var result = await _bookService.GetBookByIdAsync(id);
 
             return Ok(result);

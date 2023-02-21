@@ -1,15 +1,13 @@
 ﻿using FluentValidation;
-using Hafta4.Odev5_6_7.Entities;
 using Hafta4.Odev5_6_7.Dtos.BookOperations;
 
 namespace Hafta4.Odev5_6_7.Validators
 {
-    public class UpdateBookValidator : AbstractValidator<UpdateBookDto>
+    public class GetBookByIdValidator : AbstractValidator<GetBookDetailsDto>
     {
-        public UpdateBookValidator()
+        public GetBookByIdValidator()
         {
             RuleFor(x => x.Id).NotEmpty().GreaterThanOrEqualTo(1);
-            RuleFor(x => x.Title).NotEmpty().MinimumLength(1);
         }
     }
 }

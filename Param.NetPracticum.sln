@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hafta3.Odev3_4", "Hafta3.Od
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hafta4.Odev5_6_7", "Hafta4.Odev5_6_7\Hafta4.Odev5_6_7.csproj", "{E6BE959D-3CDC-4F90-9727-B07772510131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hafta4.Odev7(UnitTests)", "Hafta4.Odev7(UnitTests)\Hafta4.Odev7(UnitTests).csproj", "{0C1C3DC6-9633-40AB-BB73-FCC4BE26FC51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hafta4.Odev7(UnitTests)", "Hafta4.Odev7(UnitTests)\Hafta4.Odev7(UnitTests).csproj", "{0C1C3DC6-9633-40AB-BB73-FCC4BE26FC51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hafta4.Odev8", "Hafta4.Odev8\Hafta4.Odev8.csproj", "{9E7F81DB-DAB0-4E9D-825B-E6A9AEB6CCD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0C1C3DC6-9633-40AB-BB73-FCC4BE26FC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C1C3DC6-9633-40AB-BB73-FCC4BE26FC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C1C3DC6-9633-40AB-BB73-FCC4BE26FC51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E7F81DB-DAB0-4E9D-825B-E6A9AEB6CCD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E7F81DB-DAB0-4E9D-825B-E6A9AEB6CCD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E7F81DB-DAB0-4E9D-825B-E6A9AEB6CCD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E7F81DB-DAB0-4E9D-825B-E6A9AEB6CCD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

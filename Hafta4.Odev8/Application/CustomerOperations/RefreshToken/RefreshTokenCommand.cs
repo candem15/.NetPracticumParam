@@ -1,0 +1,39 @@
+﻿using Hafta4.Odev8.DbOperations;
+using Hafta4.Odev8.TokenOperations;
+
+namespace Hafta4.Odev8.Application.CustomerOperations.RefreshToken
+{
+    public class RefreshTokenCommand
+    {
+        public string RefreshToken { get; set; }
+        private readonly IMovieStoreDbContext _dbContext;
+        private readonly IConfiguration _configuration;
+
+        public RefreshTokenCommand(IMovieStoreDbContext dbContext, IConfiguration mapper)
+        {
+            _dbContext = dbContext;
+            _configuration = mapper;
+        }
+
+        public Token Handle()
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(x => x.RefresToken == RefreshToken && x.RefreshTokenExpDate > DateTime.Now);
+            if (customer != null)
+            {
+                TokenHandler handler = new TokenHandler(_configuration);
+                Token token = handler.CreateAccesToken(customer);
+
+                customer.RefresToken = token.RefreshToken;
+                customer.RefreshTokenExpDate = token.Expiration.AddMinutes(5);
+                _dbContext.SaveChanges();
+
+                return token;
+
+            }
+            else
+            {
+                throw new InvalidOperationException("Valid refresh token could not found!");
+            }
+        }
+    }
+}
